@@ -660,7 +660,7 @@ function film_price_callback($post) {
  */
 add_action('save_post', function($post_id){
 	// проверяем nonce нашей страницы, потому что save_post может быть вызван с другого места.
-	if ( !wp_verify_nonce( $_POST['film_noncename'], plugin_basename(__FILE__) ) )
+	if (!isset($_POST['film_noncename']) || !wp_verify_nonce( $_POST['film_noncename'], plugin_basename(__FILE__) ) )
 		return $post_id;
 
 	// проверяем, если это автосохранение ничего не делаем с данными нашей формы.
